@@ -21,6 +21,15 @@ class ProductResource extends JsonResource
             'description' => $this->description,
             'price' => number_format($this->price / 100, 2),
             'category' => CategoryResource::make($this->whenLoaded('category')),
+            'comments' => $this->whenLoaded('comments', function () {
+                return $this->comments->map(function ($comment) {
+                    return [
+                        'id' => $comment->id,
+                        'content' => $comment->content,
+                        'created_at' => $comment->created_at,
+                    ];
+                });
+            }),
         ];
     }
 }

@@ -17,3 +17,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('products', [ProductController::class,  'index'])
         ->middleware('throttle:products');
 });
+
+Route::get('products/{id}', [ProductController::class, 'show']);
